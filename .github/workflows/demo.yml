@@ -20,6 +20,8 @@ jobs:
         run: npm run lint
       - name: Test code
         run: npm run test
+      - name: Log Test Failed Status
+        run: echo "Test failed"
   build:
     needs: test
     runs-on: ubuntu-latest
