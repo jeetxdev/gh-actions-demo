@@ -19,8 +19,10 @@ jobs:
       - name: Lint code
         run: npm run lint
       - name: Test code
+        id: run-tests
         run: npm run test
       - name: Log Test Failed Status
+        if: failure() && steps.run-tests.outcome == 'failure'
         run: echo "Test failed"
   build:
     needs: test
