@@ -21,9 +21,12 @@ jobs:
       - name: Test code
         id: run-tests
         run: npm run test
-      - name: Log Test Failed Status
+      - name: Upload Test report
         if: failure() && steps.run-tests.outcome == 'failure'
-        run: echo "Test failed"
+        uses: actions/upload-artifact@v4
+        with:
+          name: "test-report"
+          path: test.json
   build:
     needs: test
     runs-on: ubuntu-latest
