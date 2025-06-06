@@ -5,8 +5,16 @@ on:
       - main
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+        operating-system: [ubuntu-24.04, ubuntu-22.04, macos-latest]
+    runs-on: ${{matrix.operating-system}}
     steps:
+      - name: Install Nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.node-version}}
       - name: Get code
         uses: actions/checkout@v4
       - name: Install dependencies
