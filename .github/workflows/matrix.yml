@@ -9,6 +9,12 @@ jobs:
       matrix:
         node-version: [18, 20, 22]
         operating-system: [ubuntu-24.04, ubuntu-22.04, macos-latest]
+        include:
+          - node-version: 20
+            operating-system: windows-latest
+        exclude:
+          - node-version: 18
+            operating-system: macos-latest
     runs-on: ${{matrix.operating-system}}
     steps:
       - name: Install Nodejs
